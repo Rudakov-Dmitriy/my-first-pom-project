@@ -14,6 +14,7 @@
 - pytest-xdist (параллельный запуск)
 - pytest-rerunfailures (автоперезапуск упавших тестов)
 - GitHub Actions (CI/CD)
+- Docker
 
 ## 📂 Структура проекта
 ```
@@ -35,6 +36,9 @@ my_first_pom_project/
 ├── utils/ # Утилиты
 │ └── api_auth.py # API-логин
 ├── data/ # Тестовые данные
+├── Dockerfile # Docker-образ
+├── docker-compose.yml # Docker-конфигурация
+├── .dockerignore # Исключения для Docker
 ├── .flake8 # Конфиг линтера
 ├── config.py # Конфигурация
 ├── pytest.ini # Настройки pytest
@@ -69,6 +73,12 @@ pytest -v -s
 
 # 8. Запускаем тесты параллельно (быстрее в 2-3 раза)
 pytest -v -n auto
+```
+## 🐳 Docker
+
+```powershell
+docker compose build
+docker compose up
 ```
 
 ## 📊 Allure-отчёт
