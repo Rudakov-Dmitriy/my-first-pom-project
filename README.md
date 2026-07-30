@@ -11,6 +11,7 @@
 - Pytest 9.1
 - Allure Reports
 - Flake8 (PEP 8)
+- pytest-xdist (параллельный запуск)
 - GitHub Actions (CI/CD)
 
 ## 📂 Структура проекта
@@ -54,6 +55,9 @@ playwright install
 
 # 7. Запускаем тесты
 pytest -v -s
+
+# 8. Запускаем тесты параллельно (быстрее в 2-3 раза)
+pytest -v -n auto
 ```
 
 ## 📊 Allure-отчёт
