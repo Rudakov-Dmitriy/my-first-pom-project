@@ -1,28 +1,22 @@
 import pytest
-import allure
-from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 from pages.checkout_page import CheckoutPage
-from config import settings
 
 
 class TestCheckout:
     """Тесты оформления заказа."""
 
     @pytest.fixture(autouse=True)
-    def setup(self, page):
-        """Логинимся и добавляем товар в корзину."""
-        login_page = LoginPage(page)
-        login_page.open()
-        login_page.login_as(settings.LOGIN, settings.PASSWORD)
-
-        self.products_page = ProductsPage(page)
+    def setup(self, logged_in_page):
+        """Используем быстрый логин через API и добавляем товар."""
+        self.page = logged_in_page
+        self.products_page = ProductsPage(self.page)
         self.products_page.should_be_opened()
         self.products_page.add_product_to_cart(0)
 
     @pytest.mark.smoke
     @pytest.mark.regression
-    def test_successful_checkout(self, page):
+    def test_successful_checkout(self):
         """Полный успешный цикл оформления заказа."""
         cart_page = self.products_page.go_to_cart()
         cart_page.should_be_opened()
@@ -39,7 +33,7 @@ class TestCheckout:
         assert checkout_page.get_complete_message() == checkout_page.COMPLETE_HEADER
 
     @pytest.mark.regression
-    def test_empty_first_name(self, page):
+    def test_empty_first_name(self):
         """Ошибка: пустое имя."""
         cart_page = self.products_page.go_to_cart()
         checkout_page = cart_page.go_to_checkout()
@@ -52,7 +46,7 @@ class TestCheckout:
         assert "First Name" in checkout_page.get_error_message_text()
 
     @pytest.mark.regression
-    def test_empty_last_name(self, page):
+    def test_empty_last_name(self):
         """Ошибка: пустая фамилия."""
         cart_page = self.products_page.go_to_cart()
         checkout_page = cart_page.go_to_checkout()
@@ -65,7 +59,7 @@ class TestCheckout:
         assert "Last Name" in checkout_page.get_error_message_text()
 
     @pytest.mark.regression
-    def test_empty_postal_code(self, page):
+    def test_empty_postal_code(self):
         """Ошибка: пустой индекс."""
         cart_page = self.products_page.go_to_cart()
         checkout_page = cart_page.go_to_checkout()
