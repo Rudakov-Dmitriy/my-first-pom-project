@@ -12,23 +12,34 @@
 - Allure Reports
 - Flake8 (PEP 8)
 - pytest-xdist (параллельный запуск)
+- pytest-rerunfailures (автоперезапуск упавших тестов)
 - GitHub Actions (CI/CD)
 
 ## 📂 Структура проекта
 ```
 my_first_pom_project/
+├── .github/
+│ └── workflows/
+│ └── run_tests.yml # CI/CD
 ├── pages/ # Page Object Model
-│ ├── base_page.py # Базовые методы (click, fill, ожидания)
-│ ├── login_page.py # Страница логина SauceDemo
-│ └── products_page.py # Страница товаров
+│ ├── base_page.py # Базовые методы
+│ ├── login_page.py # Страница логина
+│ ├── products_page.py # Страница товаров
+│ ├── cart_page.py # Страница корзины
+│ └── checkout_page.py # Страница оформления
 ├── tests/ # Тесты
-│ ├── conftest.py # Фикстуры и хук скриншотов
-│ └── test_login.py # Тесты логина (6 тестов)
-├── utils/ # Утилиты (API-хелперы)
+│ ├── conftest.py # Фикстуры и хуки
+│ ├── test_login.py # Тесты логина (6)
+│ ├── test_cart.py # Тесты корзины (4)
+│ └── test_checkout.py # Тесты оформления (4)
+├── utils/ # Утилиты
+│ └── api_auth.py # API-логин
 ├── data/ # Тестовые данные
-├── config.py # Конфигурация (из .env)
+├── .flake8 # Конфиг линтера
+├── config.py # Конфигурация
 ├── pytest.ini # Настройки pytest
-└── requirements.txt # Зависимости
+├── requirements.txt # Зависимости
+└── README.md
 ```
 ## ⚙️ Быстрый старт
 
