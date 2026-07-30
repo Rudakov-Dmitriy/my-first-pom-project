@@ -1,0 +1,74 @@
+name: Run UI Tests
+
+# Когда запускать тесты
+on:
+  push:                # При любом пуше в репозиторий
+    branches: [main, master]
+  pull_request:        # При создании Pull Request
+    branches: [main, master]
+  workflow_dispatch:   # Ручной запуск из интерфейса GitHub
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Виртуальная машина с Ubuntu
+    timeout-minutes: 15      # Таймаут на всё выполнение
+
+    steps:
+      # 1. Скачиваем код из репозитория
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Устанавливаем Python
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      # 3. Кэшируем зависимости (чтобы не качать их каждый раз)
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # 4. Устанавливаем зависимости
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 5. Устанавливаем браузеры Playwright
+      - name: Install Playwright browsers
+        run: |
+          playwright install chromium
+          playwright install-deps chromium
+
+      # 6. Создаём .env файл с секретами
+      - name: Create .env file
+        run: |
+          echo 'LOGIN="${{ secrets.TEST_LOGIN }}"' > .env
+          echo 'PASSWORD="${{ secrets.TEST_PASSWORD }}"' >> .env
+          echo 'BASE_URL="${{ secrets.BASE_URL }}"' >> .env
+
+      # 7. Запускаем тесты
+      - name: Run tests
+        run: |
+          pytest tests/test_login.py -v --tb=short --alluredir=./allure-results
+
+      # 8. Сохраняем Allure-отчёт
+      - name: Upload Allure report
+        if: always()  # Сохраняем отчёт, даже если тесты упали
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      # 9. Сохраняем скриншоты упавших тестов
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots
