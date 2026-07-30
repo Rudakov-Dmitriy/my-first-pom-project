@@ -79,8 +79,9 @@ flake8 .
 # 5. Устанавливаем браузеры
 playwright install
 
-# 6. Создаём .env файл
-# Добавь свои LOGIN, PASSWORD, BASE_URL
+# 6. Создаём .env файл из примера
+cp .env.example .env
+# Заполни своими данными или оставь для SauceDemo
 
 # 7. Запускаем тесты
 pytest -v -s
