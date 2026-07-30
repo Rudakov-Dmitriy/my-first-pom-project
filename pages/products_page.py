@@ -52,4 +52,15 @@ class ProductsPage(BasePage):
     def go_to_cart(self):
         """Перейти в корзину."""
         self.click(self.shopping_cart_link)
-        # Здесь можно вернуть CartPage, но пока не будем усложнять
+        from pages.cart_page import CartPage
+        return CartPage(self.page)
+
+    def get_cart_badge_count(self) -> int:
+        """Количество товаров в корзине (цифра на иконке)."""
+        try:
+            badge = self.page.locator(".shopping_cart_badge")
+            if badge.is_visible():
+                return int(badge.inner_text())
+            return 0
+        except:
+            return 0
