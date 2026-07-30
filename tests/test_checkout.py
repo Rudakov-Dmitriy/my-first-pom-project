@@ -1,6 +1,5 @@
 import pytest
 from pages.products_page import ProductsPage
-from pages.checkout_page import CheckoutPage
 
 
 class TestCheckout:

@@ -48,7 +48,7 @@ class ProductsPage(BasePage):
                     allure.attach(str(count), "Количество в корзине", allure.attachment_type.TEXT)
                     return count
                 return 0
-            except:
+            except Exception:
                 return 0
 
     def go_to_cart(self):

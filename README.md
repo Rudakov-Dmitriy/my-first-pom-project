@@ -10,6 +10,7 @@
 - Playwright 1.61
 - Pytest 9.1
 - Allure Reports
+- Flake8 (PEP 8)
 - GitHub Actions (CI/CD)
 
 ## 📂 Структура проекта
@@ -42,13 +43,16 @@ python -m venv venv
 # 3. Устанавливаем зависимости
 pip install -r requirements.txt
 
-# 4. Устанавливаем браузеры
+# 4. Проверяем качество кода
+flake8 .
+
+# 5. Устанавливаем браузеры
 playwright install
 
-# 5. Создаём .env файл (или копируем из .env.example)
+# 6. Создаём .env файл
 # Добавь свои LOGIN, PASSWORD, BASE_URL
 
-# 6. Запускаем тесты
+# 7. Запускаем тесты
 pytest -v -s
 ```
 

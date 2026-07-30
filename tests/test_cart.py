@@ -1,6 +1,5 @@
 import pytest
 from pages.products_page import ProductsPage
-from config import settings
 
 
 class TestCart:

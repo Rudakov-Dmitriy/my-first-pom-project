@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 120
+exclude =
+    .git,
+    __pycache__,
+    .pytest_cache,
+    venv,
+    .idea,
+    allure-results,
+    allure-report,
+    screenshots
+ignore = E402, W503
