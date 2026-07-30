@@ -45,6 +45,20 @@ my_first_pom_project/
 ├── requirements.txt # Зависимости
 └── README.md
 ```
+## 📊 Тестовые данные
+
+Тестовые данные хранятся в папке `data/` в формате JSON.
+
+Пример `data/users.json`:
+```json
+{
+  "standard_user": {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "description": "Стандартный пользователь для позитивных тестов"
+  }
+}
+```
 ## ⚙️ Быстрый старт
 
 ```powershell
