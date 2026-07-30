@@ -52,10 +52,10 @@ jobs:
           echo 'PASSWORD="${{ secrets.TEST_PASSWORD }}"' >> .env
           echo 'BASE_URL="${{ secrets.BASE_URL }}"' >> .env
 
-      # 7. Запускаем тесты
-      - name: Run tests
+      # 7. Запускаем smoke-тесты
+      - name: Run smoke tests
         run: |
-          pytest tests/test_login.py -v --tb=short --alluredir=./allure-results
+          pytest -m smoke -v --tb=short --alluredir=./allure-results
 
       # 8. Сохраняем Allure-отчёт
       - name: Upload Allure report
