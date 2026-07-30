@@ -54,6 +54,8 @@ pytest -v -s
 
 ## 📊 Allure-отчёт
 
+📊 [Открыть отчёт](https://rudakov-dmitriy.github.io/my-first-pom-project/)
+
 ```powershell
 pytest --alluredir=./allure-results
 allure serve ./allure-results
