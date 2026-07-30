@@ -43,6 +43,12 @@ class CartPage(BasePage):
             self.page.locator(self.remove_buttons).nth(index).click()
         return self
 
+    def go_to_checkout(self):
+        with allure.step("📦 Перехожу к оформлению заказа"):
+            self.click(self.checkout_button)
+            from pages.checkout_page import CheckoutPage
+            return CheckoutPage(self.page)
+
     def continue_shopping(self) -> None:
         with allure.step("🔙 Возвращаюсь к покупкам"):
             self.click(self.continue_shopping_button)
