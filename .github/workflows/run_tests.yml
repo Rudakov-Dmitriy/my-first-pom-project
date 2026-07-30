@@ -54,7 +54,7 @@ jobs:
 
       - name: Run smoke tests
         run: |
-          pytest -m smoke -v --tb=short --alluredir=./allure-results
+          pytest -m smoke -v -n auto --tb=short --alluredir=./allure-results
         continue-on-error: true
 
       - name: Generate Allure report
