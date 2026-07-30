@@ -35,7 +35,9 @@ my_first_pom_project/
 │ └── test_checkout.py # Тесты оформления (4)
 ├── utils/ # Утилиты
 │ └── api_auth.py # API-логин
-├── data/ # Тестовые данные
+├── data/                    # Тестовые данные (JSON, CSV)
+│   ├── README.md            # Описание форматов данных
+│   └── users.json           # Пример: логины и пароли
 ├── Dockerfile # Docker-образ
 ├── docker-compose.yml # Docker-конфигурация
 ├── .dockerignore # Исключения для Docker
